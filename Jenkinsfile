@@ -17,6 +17,11 @@ pipeline{
                 sh './gradlew test' //里的 sh step 运行的是一个 gradle 执行单元测试的命令，该命令执行之后会进行单元测试。  
              }
         }
+          stage('Archive') {  //`stage('Archive')` 这里定义了一个名为 Archive 的 stage，之后会出现在 Jenkins UI 上。  
+            steps {
+                archiveArtifacts artifacts: 'app/build/outputs/**/*.apk'， fingerprint: true    //`archiveArtifacts` 这一行执行了一个归档构建产物的操作，执行完这步操作后我们将在任务界面看见我们执行成功后的产物输出。  
+            }
+        }
 
     }
 
